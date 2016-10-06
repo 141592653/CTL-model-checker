@@ -15,3 +15,5 @@ type formula =
   | EG of formula
   | AU of formula * formula
   | EU of formula * formula
+
+val simplify_formula : formula -> formula
