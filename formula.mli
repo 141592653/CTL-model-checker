@@ -1,7 +1,7 @@
 type formula =
     False
   | True
-  | Prop of string
+  | Prop of int
   | Not of formula
   | And of formula * formula
   | Or of formula * formula
