@@ -1,6 +1,6 @@
-SOURCES=*.ml
+SOURCES=$(wildcard *.ml)
 OBJECTS=$(subst .ml,.cmo,$(SOURCES))
-MLIS=*.mli
+MLIS=$(wildcard *.mli)
 CMIS=$(subst .mli,.cmi,$(MLIS))
 
 EXEC=ctlchecker
