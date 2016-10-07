@@ -27,9 +27,9 @@ let f = AX(
 		  )
 	      ))
 
-let main() = 
+let main() =
   Printf.printf "%s\n" "*****************   Model-checker de formules CTL  ********************";
-  ignore (simplify_formula f)
+  ignore (simplify_formula f);
+  Printf.printf "%s\n" (formula_to_string f)
 
 let () = main()
-  
