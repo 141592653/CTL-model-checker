@@ -5,10 +5,10 @@ let f = AX(
 	    Equiv(
 		EU(
 		    AG(
-			Prop("a")
+			Prop 0
 		      ),
 		    AU(
-			EF(Prop("b")),Prop("c")
+			EF(Prop 1),Prop 2
 		      )
 		  ),
 		Or(
@@ -22,7 +22,7 @@ let f = AX(
 			  )
 		      ),
 		    AF(
-			Imply(Prop("a"),Prop("b"))
+			Imply(Prop 0,Prop 1)
 		      )
 		  )
 	      ))
