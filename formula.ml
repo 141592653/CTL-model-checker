@@ -52,7 +52,7 @@ let rec formula_to_string (f:formula) : string =
     | False -> "false"
     | True -> "true"
     | Prop a -> Printf.sprintf "P%i" a
-    | Not f -> Printf.sprintf " ¬%s" (formula_to_string f)
+    | Not f -> Printf.sprintf "¬%s" (formula_to_string f)
     | And (f1,f2) -> Printf.sprintf "%s ∧ %s" (formula_to_string f1)
         (formula_to_string f2)
     | Or (f1,f2) -> Printf.sprintf "%s ∨ %s" (formula_to_string f1)
