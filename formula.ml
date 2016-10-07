@@ -47,5 +47,30 @@ let rec simplify_formula f =
 	)
       )
     )
+;;
 
- 
+let rec formula_to_string (f:formula) : string =
+    match f with
+    | False -> "false"
+    | True -> "true"
+    | Prop a -> Printf.sprintf "P%i" a
+    | Not f -> Printf.sprintf "¬%s" (formula_to_string f)
+    | And (f1,f2) -> Printf.sprintf "%s∧%s" (formula_to_string f1)
+        (formula_to_string f2)
+    | Or (f1,f2) -> Printf.sprintf "%s∨%s" (formula_to_string f1)
+        (formula_to_string f2)
+    | Imply (a,b) -> Printf.sprintf "%s⇒%s" (formula_to_string f1)
+        (formula_to_string f2)
+    | Equiv (a,b) -> Printf.sprintf "%s⇔%s" (formula_to_string f1)
+        (formula_to_string f2)
+    | AX (a) -> Print.sprintf "AX(%s)" (formula_to_string a)
+    | EX (a) -> Print.sprintf "EX(%s)" (formula_to_string a)
+    | AF (a) -> Print.sprintf "AF(%s)" (formula_to_string a)
+    | EF (a) -> Print.sprintf "EF(%s)" (formula_to_string a)
+    | AF (a) -> Print.sprintf "AG(%s)" (formula_to_string a)
+    | EF (a) -> Print.sprintf "EG(%s)" (formula_to_string a)
+    | AU (a,b) -> Print.sprintf "A(%sU%s)" (formula_to_string a)
+        (formula_to_string b)
+    | EU (a,b) -> Print.sprintf "E(%sU%s)" (formula_to_string a)
+        (formula_to_string b)
+;;
