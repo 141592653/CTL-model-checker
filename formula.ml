@@ -21,7 +21,12 @@ let rec simplify_formula f =
       False, True, Prop, Not, Or , EU, EX, EG
   *)
   match f with 
-  | False | True | Prop(_) | Not(_) | Or(_,_) | EX(_) | EG(_) | EU(_) -> f
+  | False | True | Prop _-> f
+  | Not a -> Not (simplify_formula a)
+  | EX a -> EX (simplify_formula a)
+  | EG a -> EG (simplify_formula a)
+  | EU(a,b) -> EU  (simplify_formula a, simplify_formula b)
+  | Or(a,b)  -> Or (simplify_formula a, simplify_formula a)
   | And(a,b) -> 
     Not(
       Or(
