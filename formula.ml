@@ -63,10 +63,10 @@ let rec optimize_formula f =
         | True -> False
         | False -> True
         | f -> Not(f))
-    | Or(a,b) -> (match Or(optimize_formula a, optimize_formula b) with
-        | Or(False,False) -> False
-        | Or(True,_) | Or(_,True) -> True
-        | f -> f)
+    | Or(a,b) -> (match (optimize_formula a, optimize_formula b) with
+        | (False,False) -> False
+        | (True,_) | (_,True) -> True
+        | (a,b) -> Or(a,b))
     | EU(a,b) -> EU(optimize_formula a, optimize_formula b)
     | EX(a) -> EX(optimize_formula a)
     | EG(a) -> EG(optimize_formula a)
@@ -82,7 +82,7 @@ let rec formula_to_string (f:formula) : string =
     | Not f ->
             Printf.sprintf
             (match f with
-            | False | True | Prop(_) | EG(_) | EX(_) | EU(_,_) -> "¬%s"
+            | False | True | Prop(_) | EG(_) | EX(_) | EU(_,_) | Not(_) -> "¬%s"
             | _ -> "¬(%s)")
             (formula_to_string f)
     | And (f1,f2) -> Printf.sprintf "%s ∧ %s" (formula_to_string f1)

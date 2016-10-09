@@ -1,5 +1,6 @@
-type valuation = int -> bool
-type graph = ((int  list) * valuation) array 
+open Formula
 
-val prop_value : graph -> int -> int -> bool
-val next_prop_value : graph -> int -> int -> bool
+type valuation = int -> bool
+type graph = ((int  list) * valuation) array
+
+val evaluate : graph -> int -> formula -> bool
