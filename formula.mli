@@ -17,4 +17,5 @@ type formula =
   | EU of formula * formula
 
 val simplify_formula : formula -> formula
+val optimize_formula : formula -> formula
 val formula_to_string : formula -> string
