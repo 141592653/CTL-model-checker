@@ -54,12 +54,12 @@ let test_EU_g =
     |]
 
 let main() =
-  Printf.printf "%s\n" "*****************   Model-checker de formules CTL  ********************";
-  Printf.printf "Formula:\n%s\n" (formula_to_string f);
+  Printf.printf "*****************   Model-checker de formules CTL  ********************\n\n";
+  Printf.printf "Formula:\n%s\n\n" (formula_to_string f);
   let simple = simplify_formula f in
-  Printf.printf "Simplified:\n%s\n" (formula_to_string simple);
+  Printf.printf "Simplified:\n%s\n\n" (formula_to_string simple);
   let optimized = optimize_formula simple in
-  Printf.printf "Opitmized:\n%s\n" (formula_to_string optimized);
+  Printf.printf "Opitmized:\n%s\n\n" (formula_to_string optimized);
   Printf.printf "Starting unit tests\n";
   assert (evaluate test_EX_g 0 test_EX_f_success);
   assert (not (evaluate test_EX_g 0 test_EX_f_failure));

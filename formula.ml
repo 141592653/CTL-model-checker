@@ -62,14 +62,26 @@ let rec optimize_formula f =
     | Not(a) -> (match optimize_formula a with
         | True -> False
         | False -> True
-        | f -> Not(f))
+        | _f -> Not(_f))
     | Or(a,b) -> (match (optimize_formula a, optimize_formula b) with
         | (False,False) -> False
         | (True,_) | (_,True) -> True
-        | (a,b) -> Or(a,b))
-    | EU(a,b) -> EU(optimize_formula a, optimize_formula b)
-    | EX(a) -> EX(optimize_formula a)
-    | EG(a) -> EG(optimize_formula a)
+        | (False,_a) | (_a,False) -> _a
+        | (_a,_b) when _a = _b -> _a
+        | (_a,Not(_b)) when _a = _b -> True
+        | (_a,_b) -> Or(_a,_b))
+    | EU(a,b) -> (match (optimize_formula a, optimize_formula b) with
+        | (_,True) -> True
+        | (_,False) -> False
+        | (_a,_b) -> EU(_a,_b))
+    | EX(a) -> (match optimize_formula a with
+        (* EX(True) is not always True :( *)
+        | False -> False
+        | _f -> EX(_f))
+    | EG(a) -> (match optimize_formula a with
+        (* EG(True) is not always True :( *)
+        | False -> False
+        | _f -> EG(_f))
     | _ -> f
 ;;
 
