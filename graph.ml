@@ -4,7 +4,7 @@ type valuation = int -> bool
 type graph = ((int  list) * valuation) array
 
 (* The labels put on vertices within algorithms *)
-type label = Unvisited | VFalse | VTrue
+type label = Unvisited | Visited of bool
 
 let rec evaluate g v f =
     (** This function returns true iff formula f is true in g from v *)
@@ -24,16 +24,32 @@ let rec evaluate g v f =
         let labels = Array.make (Array.length g) Unvisited in
         let rec find_p_true node =
             match labels.(node) with
-            | VTrue -> true
-            | VFalse -> false
+            | Visited(a) -> a
             | Unvisited ->
                     if evaluate g node p
-                    then (labels.(node) <- VTrue;
+                    then (labels.(node) <- Visited(true);
                                 List.exists find_p_true (fst g.(node)))
-                    else (labels.(node) <- VFalse;
+                    else (labels.(node) <- Visited(false);
                                 false)
         in
         find_p_true v
+    in
+    let evaluate_until g v p q =
+        (** This function returns true iff there exists a path along which p is
+         * true leading to a state where q is true *)
+        let labels = Array.make (Array.length g) Unvisited in
+        let rec march node =
+            match labels.(node) with
+            | Visited(_) -> false
+            | Unvisited ->
+                    if evaluate g node q then true
+                    else (if evaluate g node p
+                    then (labels.(node) <- Visited(true);
+                        List.exists march (fst g.(node)))
+                    else (labels.(node) <- Visited(false);
+                        false))
+        in
+        march v
     in
     match f with
     | True -> true
@@ -43,3 +59,4 @@ let rec evaluate g v f =
     | Or(a,b) -> (evaluate g v a) || (evaluate g v b)
     | EX(a) -> evaluate_next g v a
     | EG(a) -> evaluate_globally g v a
+    | EU(a,b) -> evaluate_until g v a b

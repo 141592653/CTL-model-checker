@@ -44,6 +44,15 @@ let test_EG_g =
         ([], fun i -> i == 1);
     |]
 
+let test_EU_f_success = EU(Prop 0, Prop 1)
+let test_EU_f_failure = EU(Prop 1, Prop 2)
+let test_EU_g =
+    [|
+        ([0;1], fun i -> i == 0);
+        ([2], fun i -> i == 0);
+        ([], fun i -> i == 1);
+    |]
+
 let main() =
   Printf.printf "%s\n" "*****************   Model-checker de formules CTL  ********************";
   Printf.printf "Formula:\n%s\n" (formula_to_string f);
@@ -57,6 +66,9 @@ let main() =
   Printf.printf "%s\n" "Unit test for EX function has been successful.";
   assert (evaluate test_EG_g 0 test_EG_f_success);
   assert (not (evaluate test_EG_g 0 test_EG_f_failure));
-  Printf.printf "%s\n" "Unit test for EG function has been successful."
+  Printf.printf "%s\n" "Unit test for EG function has been successful.";
+  assert (evaluate test_EU_g 0 test_EU_f_success);
+  assert (not (evaluate test_EU_g 0 test_EU_f_failure));
+  Printf.printf "%s\n" "Unit test for EU function has been successful."
 
 let () = main()
