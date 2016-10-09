@@ -60,3 +60,4 @@ let rec evaluate g v f =
     | EX(a) -> evaluate_next g v a
     | EG(a) -> evaluate_globally g v a
     | EU(a,b) -> evaluate_until g v a b
+    | _ -> evaluate g v (optimize_formula (simplify_formula f))
