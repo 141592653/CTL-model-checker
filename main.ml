@@ -63,12 +63,12 @@ let main() =
   Printf.printf "Starting unit tests\n";
   assert (evaluate test_EX_g 0 test_EX_f_success);
   assert (not (evaluate test_EX_g 0 test_EX_f_failure));
-  Printf.printf "%s\n" "Unit tests for EX function has been successful.";
+  Printf.printf "%s\n" "Unit tests for EX function have been successful.";
   assert (evaluate test_EG_g 0 test_EG_f_success);
   assert (not (evaluate test_EG_g 0 test_EG_f_failure));
-  Printf.printf "%s\n" "Unit tests for EG function has been successful.";
+  Printf.printf "%s\n" "Unit tests for EG function have been successful.";
   assert (evaluate test_EU_g 0 test_EU_f_success);
   assert (not (evaluate test_EU_g 0 test_EU_f_failure));
-  Printf.printf "%s\n" "Unit tests for EU function has been successful."
+  Printf.printf "%s\n" "Unit tests for EU function have been successful."
 
 let () = main()
