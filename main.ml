@@ -69,6 +69,8 @@ let main() =
   Printf.printf "%s\n" "Unit tests for EG function have been successful.";
   assert (evaluate test_EU_g 0 test_EU_f_success);
   assert (not (evaluate test_EU_g 0 test_EU_f_failure));
-  Printf.printf "%s\n" "Unit tests for EU function have been successful."
+  Printf.printf "%s\n" "Unit tests for EU function have been successful.";
+  Printf.printf "f is %s on test_EX_g\n"
+    (if evaluate test_EX_g 0 optimized then "true" else "false")
 
 let () = main()
